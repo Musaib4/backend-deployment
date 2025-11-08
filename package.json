@@ -12,7 +12,16 @@
   "author": "musaib misger",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Musaib4/backend-deployment.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Musaib4/backend-deployment/issues"
+  },
+  "homepage": "https://github.com/Musaib4/backend-deployment#readme"
 }
