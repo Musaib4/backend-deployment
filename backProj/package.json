@@ -1,0 +1,19 @@
+{
+  "name": "backproj",
+  "version": "1.0.0",
+  "description": "backend project code",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemo src/index.js"
+  },
+  "keywords": [
+    "js",
+    "backend"
+  ],
+  "author": "musaib",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
