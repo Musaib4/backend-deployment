@@ -1,8 +1,16 @@
-import mongoose from "mongoose"
-import {DB_NAME} from "./constants"
+// require('dotenv').config(path: './env') creates issue in code consistency
+
+import dotenv from "dotenv"
+
+import connectDB from "./db/index.js"
 
 import express from "express"
 
+
+
+dotenv.config({
+    path: './env' //this was introduced recently that is why we need to use it as an experimental feature
+})
 
 connectDB()
 
