@@ -4,9 +4,27 @@ import {DB_NAME} from "./constants"
 import express from "express"
 
 
+connectDB()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // first approach to connect the database
 
-
+/*
 ;(async ()=>{
     try{
         await mongoose.connect(`${process.env.MONGO_DBURI}/${DB_NAME}`)
@@ -23,3 +41,4 @@ import express from "express"
         throw err
     }
 })()
+*/
