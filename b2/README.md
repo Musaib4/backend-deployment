@@ -1,7 +1,4 @@
-# Simple express demo
+# Learning Backend From Scratch
 
-> Express: fast, unopinionated, minimalist web framework for Node.js
+Making an project using nodejs express mongoose and react to learn backend
 
-This project shows a simple express server serving a single HTML page and using `express.static` to serve static files.
-
-Check out the [express documentation](https://expressjs.com/) for more information.
