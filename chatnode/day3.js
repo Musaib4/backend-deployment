@@ -212,11 +212,11 @@
 // app.listen(3000, () => console.log("Auth server running on http://localhost:3000"));
 
 
-// practice
+// event practice
 
-const EventEmitter = require("events");
+// const EventEmitter = require("events");
 
-const emitter = new EventEmitter();
+// const emitter = new EventEmitter();
 
 // 1. Listen for an event
 // emitter.on("bellRing", () => {
@@ -249,15 +249,41 @@ const emitter = new EventEmitter();
 
 // emitter.emit("orderPlaced")
 
-class schoolevent extends EventEmitter{
-    ringbell(){
-        this.emit("bell")
-    }
-}
+// class schoolevent extends EventEmitter{
+//     ringbell(){
+//         this.emit("bell")
+//     }
+// }
 
-const school = new schoolevent();
+// const school = new schoolevent();
 
-school.on("bell",()=>{
-    console.log("Bell rang — students go to class!")
-})
-school.ringbell("param")
+// school.on("bell",()=>{
+//     console.log("Bell rang — students go to class!")
+// })
+// school.ringbell("param")
+
+
+// hash practice
+
+const { log } = require("console");
+const crypto = require("crypto");
+
+// const password = "musab123";
+
+// const hash = crypto
+//   .createHash("sha256")
+//   .update(password)
+//   .digest("hex");
+
+// console.log(hash);
+
+const password = "musab123";
+const salt = crypto.randomBytes(16).toString("hex");
+
+const hash = crypto
+  .pbkdf2Sync(password, salt, 1000, 64, "sha512")
+  .toString("hex");
+
+console.log("Salt:", salt);
+console.log("Hash:", hash);
+console.log("Salt+hash:", salt,hash)
