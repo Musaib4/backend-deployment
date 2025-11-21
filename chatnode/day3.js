@@ -123,14 +123,80 @@
 
 // salt hashing
 
-const crypto = require("crypto");
+// const crypto = require("crypto");
 
-const password = "musab123";
-const salt = crypto.randomBytes(16).toString("hex");
+// const password = "musab123";
+// const salt = crypto.randomBytes(16).toString("hex");
 
-const hash = crypto
-  .pbkdf2Sync(password, salt, 1000, 64, "sha512")
-  .toString("hex");
+// const hash = crypto
+//   .pbkdf2Sync(password, salt, 1000, 64, "sha512")
+//   .toString("hex");
 
-console.log("Salt:", salt);
-console.log("Hash:", hash);
+// console.log("Salt:", salt);
+// console.log("Hash:", hash);
+
+
+// hashing example using signup login
+
+// auth-server.js
+// const express = require("express");
+// const crypto = require("crypto");
+// const bodyParser = require("body-parser");
+
+// const app = express();
+// app.use(bodyParser.json());
+
+// // --- Simple in-memory "database" ---
+// const users = {}; // { email: { salt, hash } }
+
+// // --- Helpers ---
+// function createSalt() {
+//   return crypto.randomBytes(16).toString("hex");
+// }
+
+// function hashPassword(password, salt) {
+//   // pbkdf2Sync(password, salt, iterations, keylen, digest)
+//   return crypto
+//     .pbkdf2Sync(password, salt, 100000, 64, "sha512")
+//     .toString("hex");
+// }
+
+// // --- Signup route ---
+// app.post("/signup", (req, res) => {
+//   const { email, password } = req.body;
+//   if (!email || !password) return res.status(400).json({ error: "Email + password required" });
+//   if (users[email]) return res.status(409).json({ error: "User already exists" });
+
+//   const salt = createSalt();
+//   const hash = hashPassword(password, salt);
+
+//   // store salt + hash (never store raw password)
+//   users[email] = { salt, hash };
+
+//   return res.status(201).json({ message: "User created" });
+// });
+
+// // --- Login route ---
+// app.post("/login", (req, res) => {
+//   const { email, password } = req.body;
+//   if (!email || !password) return res.status(400).json({ error: "Email + password required" });
+
+//   const user = users[email];
+//   if (!user) return res.status(401).json({ error: "Invalid credentials" });
+
+//   const hash = hashPassword(password, user.salt);
+
+//   if (hash === user.hash) {
+//     // In real app -> return JWT / session cookie. Here: simple success.
+//     return res.json({ message: "Login successful" });
+//   } else {
+//     return res.status(401).json({ error: "Invalid credentials" });
+//   }
+// });
+
+// // --- For debugging: list users (salt+hash only) ---
+// app.get("/_debug/users", (req, res) => {
+//   return res.json(users);
+// });
+
+// app.listen(3000, () => console.log("Auth server running on http://localhost:3000"));
