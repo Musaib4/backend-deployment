@@ -1,7 +1,17 @@
 // // os
 
+// load avg to load 1 5 and 10 min time
 
-// // const os = require("os");
+// const os = require('os');
+// let load_avg = os.loadavg();
+
+// function func() {
+//    console.log("The average Load of 1 minute in windows  is :" + load_avg[0]);  
+//    console.log("The average Load of 5 minute in windows is :" + load_avg[1]);  
+//    console.log("The average Load of 15 minute in windows is :" + load_avg[2]);
+// }
+// func();
+
 
 // // console.log(os.totalmem());
 // // console.log(os.freemem());
@@ -200,3 +210,54 @@
 // });
 
 // app.listen(3000, () => console.log("Auth server running on http://localhost:3000"));
+
+
+// practice
+
+const EventEmitter = require("events");
+
+const emitter = new EventEmitter();
+
+// 1. Listen for an event
+// emitter.on("bellRing", () => {
+//   console.log("Class time! Go to your classrooms.");
+// });
+
+// // 2. Emit (trigger) the event
+// setTimeout(() => {
+//     emitter.emit("bellRing");
+// }, 2000);
+
+// emitter.on("userLogin", (name,device) => {
+//   console.log(`User ${name} logged in from ${device}`);
+// });
+
+// emitter.emit("userLogin", "Musab", "Chrome");
+
+
+// emitter.on("orderPlaced", () => {
+//   console.log(`Welcome email sent `);
+// });
+
+// emitter.on("orderPlaced", () => {
+//   console.log(`Update inventory `);
+// });
+
+// emitter.on("orderPlaced",() => {
+//   console.log(`Notify admin `);
+// });
+
+// emitter.emit("orderPlaced")
+
+class schoolevent extends EventEmitter{
+    ringbell(){
+        this.emit("bell")
+    }
+}
+
+const school = new schoolevent();
+
+school.on("bell",()=>{
+    console.log("Bell rang — students go to class!")
+})
+school.ringbell("param")
