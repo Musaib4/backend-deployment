@@ -265,7 +265,6 @@
 
 // hash practice
 
-const { log } = require("console");
 const crypto = require("crypto");
 
 // const password = "musab123";
@@ -277,13 +276,52 @@ const crypto = require("crypto");
 
 // console.log(hash);
 
-const password = "musab123";
-const salt = crypto.randomBytes(16).toString("hex");
+// const password = "musab123";
+// const salt = crypto.randomBytes(16).toString("hex");
 
-const hash = crypto
-  .pbkdf2Sync(password, salt, 1000, 64, "sha512")
-  .toString("hex");
+// const hash = crypto
+//   .pbkdf2Sync(password, salt, 1000, 64, "sha512")
+//   .toString("hex");
 
-console.log("Salt:", salt);
-console.log("Hash:", hash);
-console.log("Salt+hash:", salt,hash)
+// console.log("Salt:", salt);
+// console.log("Hash:", hash);
+// console.log("Salt+hash:", salt,hash)
+
+users ={}
+
+users.signup =(email,password)=>{
+    const salt = crypto.randomBytes(16).toString("hex");
+    const hash = crypto
+    .pbkdf2Sync(password, salt, 1000, 64, "sha512")
+    .toString("hex");
+
+    users[email] = { salt, hash };
+    console.log("User registered:", email);
+}
+
+users.login = (email,password)=>{
+
+    if (!users[email]) {
+    console.log("User does not exist!");
+    return;
+  }
+
+    const storedSalt = users[email].salt;
+    const storedHash = users[email].hash;
+
+    const loginHash = crypto
+    .pbkdf2Sync(password, storedSalt, 1000, 64, "sha512")
+    .toString("hex");
+
+    if (loginHash === storedHash) {
+    console.log("Login successful!");
+  } else {
+    console.log("Invalid credentials");
+  }
+}
+
+users.signup("my@123.c0m","Musaib123")
+users.login("my@123.c0m","Musaib123")
+
+
+console.log(users)
