@@ -1,105 +1,136 @@
-// os
+// // os
 
 
-// const os = require("os");
+// // const os = require("os");
 
-// console.log(os.totalmem());
-// console.log(os.freemem());
-// console.log(os.cpus());
-// console.log(os.type());
-// console.log(os.homedir());
+// // console.log(os.totalmem());
+// // console.log(os.freemem());
+// // console.log(os.cpus());
+// // console.log(os.type());
+// // console.log(os.homedir());
 
 
 
-// eventEmitter
+// // eventEmitter
 
-const EventEmitter = require("events");
+// const EventEmitter = require("events");
 
-const emitter = new EventEmitter();
+// const emitter = new EventEmitter();
 
-// // 1. Listen for an event
-// emitter.on("greet", () => {
-//   console.log("Hello Musab!");
+// // // 1. Listen for an event
+// // emitter.on("greet", () => {
+// //   console.log("Hello Musab!");
+// // });
+
+// // 2. Emit (trigger) the event
+// // emitter.emit("greet");
+
+
+// // emitter.on("message", (name, age) => {
+// //     console.log(`User: ${name}, Age: ${age}`);
+// // });
+
+// // emitter.emit("message", "Musab", 20);
+
+// // multiple listeners for same event
+
+// // emitter.on("login", () => console.log("User logged in"));
+// // emitter.on("login", () => console.log("Send welcome email"));
+// // emitter.on("login", () => console.log("Log activity"));
+
+// // emitter.emit("login");
+
+// // custom event
+
+// // class MyEmitter extends EventEmitter {}
+
+// // const myEmitter = new MyEmitter();
+
+// // myEmitter.on("water", () => {
+// //   console.log("Please turn off the motor!");
+// // });
+
+// // myEmitter.emit("water");
+
+
+// // diff.between custom and simple events
+
+// const EventEmitter = require("events");
+// const emitter = new EventEmitter();
+
+// // 1. Listeners
+// emitter.on("userRegistered", (user) => {
+//   console.log(`Welcome email sent to ${user}`);
 // });
 
-// 2. Emit (trigger) the event
-// emitter.emit("greet");
-
-
-// emitter.on("message", (name, age) => {
-//     console.log(`User: ${name}, Age: ${age}`);
+// emitter.on("userRegistered", (user) => {
+//   console.log(`Activity logged for ${user}`);
 // });
 
-// emitter.emit("message", "Musab", 20);
-
-// multiple listeners for same event
-
-// emitter.on("login", () => console.log("User logged in"));
-// emitter.on("login", () => console.log("Send welcome email"));
-// emitter.on("login", () => console.log("Log activity"));
-
-// emitter.emit("login");
-
-// custom event
-
-// class MyEmitter extends EventEmitter {}
-
-// const myEmitter = new MyEmitter();
-
-// myEmitter.on("water", () => {
-//   console.log("Please turn off the motor!");
+// emitter.on("userRegistered", (user) => {
+//   console.log(`Analytics updated for ${user}`);
 // });
 
-// myEmitter.emit("water");
+// // 2. Emit event
+// emitter.emit("userRegistered", "Musab");
 
 
-// diff.between custom and simple events
+// // custom event
 
-const EventEmitter = require("events");
-const emitter = new EventEmitter();
+// const EventEmitter = require("events");
 
-// 1. Listeners
-emitter.on("userRegistered", (user) => {
-  console.log(`Welcome email sent to ${user}`);
-});
+// class UserEmitter extends EventEmitter {
+//   registerUser(name) {
+//     console.log(`User ${name} registered`);
+//     this.emit("userRegistered", name);
+//   }
+// }
 
-emitter.on("userRegistered", (user) => {
-  console.log(`Activity logged for ${user}`);
-});
+// const userEvents = new UserEmitter();
 
-emitter.on("userRegistered", (user) => {
-  console.log(`Analytics updated for ${user}`);
-});
+// // 1. Listeners
+// userEvents.on("userRegistered", (user) => {
+//   console.log(`Welcome email sent to ${user}`);
+// });
 
-// 2. Emit event
-emitter.emit("userRegistered", "Musab");
+// userEvents.on("userRegistered", (user) => {
+//   console.log(`Activity logged for ${user}`);
+// });
+
+// userEvents.on("userRegistered", (user) => {
+//   console.log(`Analytics updated for ${user}`);
+// });
+
+// // 2. Use class method
+// userEvents.registerUser("Musab");
 
 
-// custom event
+// crypto hashing
 
-const EventEmitter = require("events");
+// basic hashing
 
-class UserEmitter extends EventEmitter {
-  registerUser(name) {
-    console.log(`User ${name} registered`);
-    this.emit("userRegistered", name);
-  }
-}
+// const crypto = require("crypto");
 
-const userEvents = new UserEmitter();
+// const password = "musab123";
 
-// 1. Listeners
-userEvents.on("userRegistered", (user) => {
-  console.log(`Welcome email sent to ${user}`);
-});
+// const hash = crypto
+//   .createHash("sha256")
+//   .update(password)
+//   .digest("hex");
 
-userEvents.on("userRegistered", (user) => {
-  console.log(`Activity logged for ${user}`);
-});
+// console.log(hash);
 
-userEvents.on("userRegistered", (user) => {
-  console.log(`Analytics updated for ${user}`);
-});
 
-// 2. Use class method
-userEvents.registerUser("Musab");
+// salt hashing
+
+const crypto = require("crypto");
+
+const password = "musab123";
+const salt = crypto.randomBytes(16).toString("hex");
+
+const hash = crypto
+  .pbkdf2Sync(password, salt, 1000, 64, "sha512")
+  .toString("hex");
+
+console.log("Salt:", salt);
+console.log("Hash:", hash);
